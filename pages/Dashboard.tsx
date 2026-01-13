@@ -1,5 +1,17 @@
 import React, { useState } from "react";
 import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+} from "recharts";
+import {
   useNavigate,
   Link,
   Routes,
@@ -7,6 +19,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import CreateClaim from "./CreateClaim";
+import WalletPage from "./WalletPage";
 
 // Placeholder Component for new routes
 const PlaceholderPage = ({ title, icon }: { title: string; icon: string }) => (
@@ -65,22 +78,37 @@ const DashboardHome: React.FC = () => {
     }, 1500);
   };
 
-  const chartData = {
-    Weekly: {
-      path: "M0,120 C50,110 100,130 150,90 C200,50 250,70 300,40 C350,10 400,30 450,20 L500,10",
-      burnRate: "-12%",
-      savings: "₹1,850",
-    },
-    Monthly: {
-      path: "M0,100 C50,120 100,80 150,100 C200,60 250,90 300,50 C350,30 400,40 450,10 L500,30",
-      burnRate: "-8%",
-      savings: "₹7,420",
-    },
-    Yearly: {
-      path: "M0,80 C50,60 100,90 150,70 C200,40 250,50 300,20 C350,40 400,10 450,5 L500,60",
-      burnRate: "-15%",
-      savings: "₹85,300",
-    },
+  const chartDataMap = {
+    Weekly: [
+      { name: "Mon", value: 40 },
+      { name: "Tue", value: 30 },
+      { name: "Wed", value: 20 },
+      { name: "Thu", value: 27 },
+      { name: "Fri", value: 18 },
+      { name: "Sat", value: 23 },
+      { name: "Sun", value: 34 },
+    ],
+    Monthly: [
+      { name: "Week 1", value: 20 },
+      { name: "Week 2", value: 45 },
+      { name: "Week 3", value: 30 },
+      { name: "Week 4", value: 50 },
+    ],
+    Yearly: [
+      { name: "Jan", value: 65 },
+      { name: "Feb", value: 59 },
+      { name: "Mar", value: 80 },
+      { name: "Apr", value: 81 },
+      { name: "May", value: 56 },
+      { name: "Jun", value: 55 },
+      { name: "Jul", value: 40 },
+    ],
+  };
+
+  const chartInfo = {
+    Weekly: { burnRate: "-12%", savings: "₹1,850" },
+    Monthly: { burnRate: "-8%", savings: "₹7,420" },
+    Yearly: { burnRate: "-15%", savings: "₹85,300" },
   };
 
   return (
@@ -165,34 +193,29 @@ const DashboardHome: React.FC = () => {
           </div>
           <div className="relative mt-4 flex items-center justify-center py-4">
             {/* SVG Gauge */}
-            <svg
-              className="h-32 w-32 -rotate-90 transform"
-              viewBox="0 0 100 100"
-            >
-              <circle
-                cx="50"
-                cy="50"
-                fill="transparent"
-                r="40"
-                stroke="#283932"
-                strokeWidth="8"
-              ></circle>
-              <circle
-                cx="50"
-                cy="50"
-                fill="transparent"
-                r="40"
-                stroke="#11d483"
-                strokeDasharray="251.2"
-                strokeDashoffset="37.68"
-                strokeLinecap="round"
-                strokeWidth="8"
-                className="transition-all duration-1000 ease-out"
-              ></circle>
-            </svg>
-            <div className="absolute flex flex-col items-center">
-              <span className="text-3xl font-bold text-white">85</span>
-              <span className="text-xs font-medium text-gray-500">/ 100</span>
+            <div className="h-32 w-32 relative">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={[{ value: 85 }, { value: 15 }]}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={36}
+                    outerRadius={44}
+                    startAngle={90}
+                    endAngle={-270}
+                    dataKey="value"
+                    stroke="none"
+                  >
+                    <Cell key="cell-0" fill="#11d483" />
+                    <Cell key="cell-1" fill="#283932" />
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
+              <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                <span className="text-3xl font-bold text-white">85</span>
+                <span className="text-xs font-medium text-gray-500">/ 100</span>
+              </div>
             </div>
           </div>
           <div className="flex items-center justify-center gap-2 rounded-lg bg-green-500/10 px-3 py-2">
@@ -341,109 +364,59 @@ const DashboardHome: React.FC = () => {
         </div>
         <div className="flex flex-col md:flex-row gap-8">
           <div className="flex-1 relative h-64 w-full">
-            {/* Custom Chart SVG */}
-            <svg
-              className="h-full w-full overflow-visible"
-              preserveAspectRatio="none"
-              viewBox="0 0 500 150"
-            >
-              <defs>
-                <linearGradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
-                  <stop
-                    offset="0%"
-                    stopColor="#11d483"
-                    stopOpacity="0.3"
-                  ></stop>
-                  <stop
-                    offset="100%"
-                    stopColor="#11d483"
-                    stopOpacity="0"
-                  ></stop>
-                </linearGradient>
-              </defs>
-              {/* Grid Lines */}
-              <line
-                opacity="0.2"
-                stroke="#334155"
-                strokeDasharray="4 4"
-                strokeWidth="1"
-                x1="0"
-                x2="500"
-                y1="150"
-                y2="150"
-              ></line>
-              <line
-                opacity="0.2"
-                stroke="#334155"
-                strokeDasharray="4 4"
-                strokeWidth="1"
-                x1="0"
-                x2="500"
-                y1="100"
-                y2="100"
-              ></line>
-              <line
-                opacity="0.2"
-                stroke="#334155"
-                strokeDasharray="4 4"
-                strokeWidth="1"
-                x1="0"
-                x2="500"
-                y1="50"
-                y2="50"
-              ></line>
-              <line
-                opacity="0.2"
-                stroke="#334155"
-                strokeDasharray="4 4"
-                strokeWidth="1"
-                x1="0"
-                x2="500"
-                y1="0"
-                y2="0"
-              ></line>
-              {/* Data Path */}
-              <path
-                className="transition-all duration-500 ease-in-out"
-                d={`${chartData[timeRange].path} V150 H0 Z`}
-                fill="url(#chartGradient)"
-              ></path>
-              <path
-                className="transition-all duration-500 ease-in-out"
-                d={chartData[timeRange].path}
-                fill="none"
-                stroke="#11d483"
-                strokeLinecap="round"
-                strokeWidth="3"
-              ></path>
-            </svg>
-            {/* Axis Labels */}
-            <div className="flex justify-between mt-2 text-xs font-medium text-gray-500">
-              {timeRange === "Weekly" && (
-                <>
-                  <span>Week 1</span>
-                  <span>Week 2</span>
-                  <span>Week 3</span>
-                  <span>Week 4</span>
-                </>
-              )}
-              {timeRange === "Monthly" && (
-                <>
-                  <span>Jan</span>
-                  <span>Apr</span>
-                  <span>Aug</span>
-                  <span>Dec</span>
-                </>
-              )}
-              {timeRange === "Yearly" && (
-                <>
-                  <span>2023</span>
-                  <span>2024</span>
-                  <span>2025</span>
-                  <span>2026</span>
-                </>
-              )}
-            </div>
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart
+                data={chartDataMap[timeRange]}
+                margin={{
+                  top: 10,
+                  right: 0,
+                  left: 0,
+                  bottom: 0,
+                }}
+              >
+                <defs>
+                  <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#11d483" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="#11d483" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  stroke="#334155"
+                  opacity={0.2}
+                  vertical={false}
+                />
+                <XAxis
+                  dataKey="name"
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fill: "#6b7280", fontSize: 12 }}
+                  dy={10}
+                />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#1c1c1c",
+                    borderColor: "#333",
+                    borderRadius: "8px",
+                    color: "#fff",
+                  }}
+                  itemStyle={{ color: "#11d483" }}
+                  cursor={{
+                    stroke: "#11d483",
+                    strokeWidth: 1,
+                    strokeDasharray: "4 4",
+                  }}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="value"
+                  stroke="#11d483"
+                  strokeWidth={3}
+                  fill="url(#colorValue)"
+                  animationDuration={1000}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
           </div>
           {/* Side Stats for Chart */}
           <div className="flex flex-row md:flex-col gap-4 min-w-[200px]">
@@ -451,8 +424,8 @@ const DashboardHome: React.FC = () => {
               <p className="text-xs text-gray-500 uppercase tracking-wider">
                 Burn Rate
               </p>
-              <p className="text-2xl font-bold text-white transition-all key={chartData[timeRange].burnRate}">
-                {chartData[timeRange].burnRate}
+              <p className="text-2xl font-bold text-white transition-all key={chartInfo[timeRange].burnRate}">
+                {chartInfo[timeRange].burnRate}
               </p>
               <p className="text-xs font-medium text-primary">
                 ↓ Low Consumption
@@ -462,8 +435,8 @@ const DashboardHome: React.FC = () => {
               <p className="text-xs text-gray-500 uppercase tracking-wider">
                 Projected Savings
               </p>
-              <p className="text-2xl font-bold text-white transition-all key={chartData[timeRange].savings}">
-                {chartData[timeRange].savings}
+              <p className="text-2xl font-bold text-white transition-all key={chartInfo[timeRange].savings}">
+                {chartInfo[timeRange].savings}
               </p>
               <p className="text-xs font-medium text-primary">
                 ↑ Better than average
@@ -807,6 +780,7 @@ const Dashboard: React.FC = () => {
         <Routes>
           <Route path="/" element={<DashboardHome />} />
           <Route path="/claims" element={<CreateClaim />} />
+          <Route path="/wallet" element={<WalletPage />} />
           <Route
             path="/stats"
             element={<PlaceholderPage title="Drive Stats" icon="speed" />}
