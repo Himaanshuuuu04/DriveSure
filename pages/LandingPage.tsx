@@ -1,6 +1,7 @@
 import React from "react";
 import { AreaChart, Area, ResponsiveContainer } from "recharts";
 import { useNavigate } from "react-router-dom";
+import ElectricBorder from "@/components/ElectricBorder";
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
@@ -145,85 +146,99 @@ const LandingPage: React.FC = () => {
 
             {/* Hero Visual / Dashboard */}
             <div className="flex-1 w-full relative group perspective-[1000px]">
-              <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-white/10 bg-landing-surface shadow-2xl transition-transform duration-700 ease-out transform group-hover:rotate-y-2 group-hover:rotate-x-2">
-                {/* Dashboard UI Mockup */}
-                <div
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{
-                    backgroundImage:
-                      "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCVpqH55eF-rte5T4FemVlAHMAl_LbYc6cE6elP1uH_e_Rd32Te_61pfHiV8g2RSYeQgORxrIAH3Du9_JmnWQvq9QNt_opobVniE7zaZ5V8ladL-Goz2K7cwG09m_5J56fXU4lhOvo69nGiyicnuEzRdkQQ0DabctYjM_N2dcjrE9sv51bm9iebApmdVhtHISAO4x0sbdTfJw7YVIPaOYyUIE2SacAjIV6iwy2jkIJpWgCO1b4c5cYk8_Aq0nPhl3ldRAxNcqlWyg')",
-                    opacity: 0.4,
-                  }}
-                ></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-landing-bg via-landing-bg/50 to-transparent"></div>
+              <ElectricBorder
+                color="#11d483"
+                speed={1}
+                chaos={0.5}
+                borderRadius={12}
+                className="w-full aspect-video shadow-2xl transition-transform duration-700 ease-out transform group-hover:rotate-y-2 group-hover:rotate-x-2"
+              >
+                <div className="relative w-full h-full rounded-xl overflow-hidden bg-landing-surface border border-white/10">
+                  {/* Dashboard UI Mockup */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{
+                      backgroundImage:
+                        "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCVpqH55eF-rte5T4FemVlAHMAl_LbYc6cE6elP1uH_e_Rd32Te_61pfHiV8g2RSYeQgORxrIAH3Du9_JmnWQvq9QNt_opobVniE7zaZ5V8ladL-Goz2K7cwG09m_5J56fXU4lhOvo69nGiyicnuEzRdkQQ0DabctYjM_N2dcjrE9sv51bm9iebApmdVhtHISAO4x0sbdTfJw7YVIPaOYyUIE2SacAjIV6iwy2jkIJpWgCO1b4c5cYk8_Aq0nPhl3ldRAxNcqlWyg')",
+                      opacity: 0.4,
+                    }}
+                  ></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-landing-bg via-landing-bg/50 to-transparent"></div>
 
-                {/* HUD Elements */}
-                <div className="absolute top-6 left-6 right-6 flex justify-between items-start">
-                  <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-lg p-3">
-                    <div className="text-xs text-slate-400 mb-1">
-                      Vehicle Status
-                    </div>
-                    <div className="flex items-center gap-2 text-primary font-bold">
-                      <span className="material-symbols-outlined text-sm">
-                        wifi_tethering
-                      </span>
-                      ONLINE
-                    </div>
-                  </div>
-                  <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-lg p-3 flex gap-4">
-                    <div>
-                      <div className="text-xs text-slate-400">Battery</div>
-                      <div className="text-white font-mono">82%</div>
-                    </div>
-                    <div>
-                      <div className="text-xs text-slate-400">Range</div>
-                      <div className="text-white font-mono">240mi</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Central Car Visualization (Wireframe Simulation) */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative w-64 h-32 border border-primary/30 rounded-full flex items-center justify-center animate-pulse">
-                    <div className="w-full h-full absolute border border-accent-blue/30 rounded-full scale-125 opacity-50"></div>
-                    <span className="material-symbols-outlined text-6xl text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
-                      directions_car
-                    </span>
-
-                    {/* Data Lines */}
-                    <div className="absolute -right-24 top-0 flex items-center gap-2">
-                      <div className="w-12 h-[1px] bg-primary"></div>
-                      <div className="bg-primary/20 backdrop-blur px-2 py-1 rounded text-xs text-primary font-mono border border-primary/50">
-                        Safe Braking
+                  {/* HUD Elements */}
+                  <div className="absolute top-6 left-6 right-6 flex justify-between items-start">
+                    <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-lg p-3">
+                      <div className="text-xs text-slate-400 mb-1">
+                        Vehicle Status
+                      </div>
+                      <div className="flex items-center gap-2 text-primary font-bold">
+                        <span className="material-symbols-outlined text-sm">
+                          wifi_tethering
+                        </span>
+                        ONLINE
                       </div>
                     </div>
-                    <div className="absolute -left-24 bottom-0 flex items-center gap-2">
-                      <div className="bg-accent-blue/20 backdrop-blur px-2 py-1 rounded text-xs text-accent-blue font-mono border border-accent-blue/50">
-                        Cornering: Good
+                    <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-lg p-3 flex gap-4">
+                      <div>
+                        <div className="text-xs text-slate-400">Battery</div>
+                        <div className="text-white font-mono">82%</div>
                       </div>
-                      <div className="w-12 h-[1px] bg-accent-blue"></div>
+                      <div>
+                        <div className="text-xs text-slate-400">Range</div>
+                        <div className="text-white font-mono">240mi</div>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Bottom Stats */}
-                <div className="absolute bottom-6 left-6 right-6 grid grid-cols-3 gap-3">
-                  <div className="bg-landing-surface-highlight/80 backdrop-blur border border-white/10 p-3 rounded-lg">
-                    <div className="text-xs text-slate-400">Current Score</div>
-                    <div className="text-xl font-bold text-white">94/100</div>
+                  {/* Central Car Visualization (Wireframe Simulation) */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative w-64 h-32 border border-primary/30 rounded-full flex items-center justify-center ">
+                      {/* <div className="w-full h-full absolute border border-accent-blue/30 rounded-full scale-125 opacity-50"></div> */}
+                      {/* <span className="material-symbols-outlined text-6xl text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+                        directions_car
+                      </span> */}
+
+                      {/* Data Lines */}
+                      <div className="absolute -right-24 top-0 flex items-center gap-2">
+                        <div className="w-12 h-[1px] bg-primary"></div>
+                        <div className="bg-primary/20 backdrop-blur px-2 py-1 rounded text-xs text-primary font-mono border border-primary/50">
+                          Safe Braking
+                        </div>
+                      </div>
+                      <div className="absolute -left-24 bottom-0 flex items-center gap-2">
+                        <div className="bg-accent-blue/20 backdrop-blur px-2 py-1 rounded text-xs text-accent-blue font-mono border border-accent-blue/50">
+                          Cornering: Good
+                        </div>
+                        <div className="w-12 h-[1px] bg-accent-blue"></div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="bg-landing-surface-highlight/80 backdrop-blur border border-white/10 p-3 rounded-lg">
-                    <div className="text-xs text-slate-400">Trip Savings</div>
-                    <div className="text-xl font-bold text-primary">+$2.45</div>
-                  </div>
-                  <div className="bg-landing-surface-highlight/80 backdrop-blur border border-white/10 p-3 rounded-lg">
-                    <div className="text-xs text-slate-400">Tokens Earned</div>
-                    <div className="text-xl font-bold text-accent-blue">
-                      12.5 SPC
+
+                  {/* Bottom Stats */}
+                  <div className="absolute bottom-6 left-6 right-6 grid grid-cols-3 gap-3">
+                    <div className="bg-landing-surface-highlight/80 backdrop-blur border border-white/10 p-3 rounded-lg">
+                      <div className="text-xs text-slate-400">
+                        Current Score
+                      </div>
+                      <div className="text-xl font-bold text-white">94/100</div>
+                    </div>
+                    <div className="bg-landing-surface-highlight/80 backdrop-blur border border-white/10 p-3 rounded-lg">
+                      <div className="text-xs text-slate-400">Trip Savings</div>
+                      <div className="text-xl font-bold text-primary">
+                        +$2.45
+                      </div>
+                    </div>
+                    <div className="bg-landing-surface-highlight/80 backdrop-blur border border-white/10 p-3 rounded-lg">
+                      <div className="text-xs text-slate-400">
+                        Tokens Earned
+                      </div>
+                      <div className="text-xl font-bold text-accent-blue">
+                        12.5 SPC
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </ElectricBorder>
             </div>
           </div>
         </div>
@@ -231,8 +246,8 @@ const LandingPage: React.FC = () => {
 
       {/* Ticker Tape */}
       <div className="w-full h-10 bg-primary overflow-hidden flex items-center">
-        <div className="ticker-wrap">
-          <div className="ticker-move">
+        <div className="ticker-wrap ">
+          <div className="ticker-move animate-ticker  ">
             <div className="ticker-item">
               LIVE: USER #8821 SAVED 15% ON PREMIUM
             </div>

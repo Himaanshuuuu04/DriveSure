@@ -151,7 +151,7 @@ const ProcessingView = ({ onComplete }: { onComplete: () => void }) => {
         </div>
 
         <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="md:col-span-3 lg:col-span-3 rounded-xl overflow-hidden relative group border border-white/5 bg-black/40 h-64 md:h-auto min-h-[300px]">
+          <div className="md:col-span-3 lg:col-span-3 rounded-xl relative group border border-white/5 bg-black/40 h-full">
             <div className="absolute inset-0 flex items-center justify-center">
               <img
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCn-3Ggn_vFN64y3ruXen17wEvxhRa54cIKVeSIKMFe4CjQfsO9jz0_vVc5xf0UGLLqiEZp4192uX7TLkvxRoi1_ULfQYJXws8-cY-ec5nUQtIR60bH9fTiJMi9DtYAH23xOOQ6nO2zOx9NRPNGoR7SSFRw2uKjt3vL5fczVEToSpxSndzw3eDdZT4jpV_4nrl1HzSWBIpRyD0kE8VGD1t6kH6QrWDkjk0j-zC3rdSt5mT8OfYPYauGcXqwGNW4eb8ni_47WGPYQw"
@@ -182,7 +182,7 @@ const ProcessingView = ({ onComplete }: { onComplete: () => void }) => {
             </div>
             <div className="text-[#111815] font-black text-3xl">₹2,04,500</div>
           </div>
-        </div>
+        </div>``
       </section>
     </div>
   );
@@ -608,7 +608,14 @@ const CreateClaim: React.FC = () => {
                       {/* Preloaded Examples */}
                       <div className="relative h-24 overflow-hidden rounded-xl border border-white/10 group cursor-pointer">
                         <img
-                          src="https://images.unsplash.com/photo-1562920616-0b5c1c4c15d2?auto=format&fit=crop&q=80&w=300&h=300"
+                          src="https://inspektlabs.com/blog/content/images/size/w1200/2022/08/first-image-bumper.jpg"
+                          alt="Car Damage"
+                          className="h-full w-full object-cover opacity-80 transition-transform group-hover:scale-110"
+                        />
+                      </div>
+                       <div className="relative h-24 overflow-hidden rounded-xl border border-white/10 group cursor-pointer">
+                        <img
+                          src="https://images.fosterwebmarketing.com/880/Car-accident-on-road-front-view.jpeg"
                           alt="Car Damage"
                           className="h-full w-full object-cover opacity-80 transition-transform group-hover:scale-110"
                         />
